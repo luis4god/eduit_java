@@ -6,6 +6,12 @@ public abstract class Figura {
 	private float y;
 	private String nombre;
 	
+	public Figura(String nombre, float x, float y){
+		this.nombre = nombre;
+		this.x = x;
+		this.y = y;
+	}
+	
 	public void imprimir(){
 		System.out.println(this.nombre);
 		System.out.println("x = "+this.x);

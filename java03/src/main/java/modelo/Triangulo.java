@@ -2,8 +2,16 @@ package modelo;
 
 public class Triangulo extends Figura {
 
+	public Triangulo(String nombre, float x, float y, float base, float altura) {
+		super(nombre, x, y);
+		this.base = base;
+		this.altura = altura;
+	}
+
 	private float base;
 	private float altura;
+	
+	
 	
 	public void imprimir(){
 		super.imprimir();
