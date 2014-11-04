@@ -15,6 +15,7 @@ public class Circulo extends Figura {
 	public void imprimir(){
 		super.imprimir();
 		System.out.println("radio="+this.radio);
+		System.out.println("Superficie: "+this.superficie());
 	}
 	
 	@Override

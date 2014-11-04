@@ -17,6 +17,7 @@ public class Triangulo extends Figura {
 		super.imprimir();
 		System.out.println("base="+this.base);
 		System.out.println("altura="+this.altura);
+		System.out.println("Superficie="+this.superficie());
 	}
 	
 	@Override
