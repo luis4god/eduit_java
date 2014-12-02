@@ -1,31 +1,34 @@
 package basedatos;
 
-import java.net.ConnectException;
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DbHelper {
 	
-	public static final String DRIVER = "com.mysql.jdbc.Driver";
 	
 	public static void main(String[] args) throws ClassNotFoundException, SQLException{
 		
-		Class.forName(DRIVER);
 		
-		Connection cn =	DriverManager.getConnection("jdbc:mysql://localhost/java_datos", "root","");
+		Connection cn =	UtilDB.getConexionMysql();
 		
 		Statement stmt = cn.createStatement();
 		
+		PreparedStatement prStmt = cn.prepareStatement("select * from persona where nombre = ? ");
+		
+		prStmt.setString(1, "Jose");
+		
 		//ResultSet rs = stmt.executeQuery("Select * from persona");
 		
-		leer(stmt);
 		
-		insetar(stmt,new Integer(7),"Jose","toto",new Integer(4));
+		//leer(stmt);
 		
-		leer(stmt);
+		insetar(stmt,new Integer(4),"Ernesto","Guevara",new Integer(7));
+		
+		leerPrepareStatement(prStmt);
+		//leer(stmt);
 		
 		stmt.close();
 		cn.close();
@@ -47,6 +50,16 @@ public class DbHelper {
 		
 		
 		stmt.execute("INSERT INTO PERSONA (dni,nombre,apellido,canthijos) VALUES ('"+dni.toString()+"','"+nombre+"','"+apellido+"',"+canthijos+")");
+		
+	}
+	
+	public static void leerPrepareStatement(PreparedStatement prStmt) throws SQLException{
+		ResultSet res = prStmt.executeQuery();
+		
+		while(res.next()){
+			System.out.print("Nombre "+res.getString("nombre") + " " +  res.getString("apellido"));
+			System.out.println(" Hijos "+res.getInt("canthijos"));
+		}
 		
 	}
 	
